@@ -4,6 +4,7 @@ import time
 
 def main_menu():
     while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("==============================")
         print("            ztool              ")
         print("==============================")
@@ -50,14 +51,24 @@ def webhook_spammer():
     print("==============================")
     print("        Discord Webhook Spammer")
     print("==============================")
-    webhook_url = input("Enter Discord webhook URL: ")
+    webhook_url = input("Enter Discord webhook URL: ").strip()
     message = input("Enter message to spam: ")
-    message_count = int(input("Enter number of messages to send: "))
+    while True:
+        try:
+            message_count = int(input("Enter number of messages to send: "))
+            break
+        except ValueError:
+            print("Please enter a valid number.")
 
     print(f"Spamming Discord webhook {webhook_url} with {message_count} messages...")
-    for i in range(message_count):
-        print(f"Sending message {i + 1}...")
-        requests.post(webhook_url, json={"content": message})
+    try:
+        for i in range(message_count):
+            print(f"Sending message {i + 1}...")
+            response = requests.post(webhook_url, json={"content": message})
+            response.raise_for_status()  # Raise error for non-2xx responses
+            time.sleep(0.5)  # Add a delay to avoid rate limits (adjust as needed)
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
     
     print("Webhook spam complete.")
     input("Press Enter to continue...")
@@ -67,11 +78,16 @@ def webhook_deleter():
     print("==============================")
     print("        Delete Discord Webhook")
     print("==============================")
-    webhook_url = input("Enter Discord webhook URL to delete: ")
+    webhook_url = input("Enter Discord webhook URL to delete: ").strip()
 
     print(f"Deleting Discord webhook {webhook_url}...")
-    requests.delete(webhook_url)
-    print("Webhook deleted.")
+    try:
+        response = requests.delete(webhook_url)
+        response.raise_for_status()
+        print("Webhook deleted successfully.")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+    
     input("Press Enter to continue...")
 
 def ip_lookup():
@@ -79,11 +95,20 @@ def ip_lookup():
     print("==============================")
     print("        IP Address Lookup")
     print("==============================")
-    ip_address = input("Enter IP address to lookup: ")
+    ip_address = input("Enter IP address to lookup: ").strip()
 
     print(f"Looking up information for IP address {ip_address}...")
-    response = requests.get(f"https://ipinfo.io/{ip_address}/json")
-    print(response.json())
+    try:
+        response = requests.get(f"https://ipinfo.io/{ip_address}/json")
+        response.raise_for_status()
+        data = response.json()
+        print(f"IP Address: {data['ip']}")
+        print(f"City: {data['city']}")
+        print(f"Region: {data['region']}")
+        print(f"Country: {data['country']}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+    
     input("Press Enter to continue...")
 
 def what_is_my_ip():
@@ -92,8 +117,13 @@ def what_is_my_ip():
     print("        What's My IP?")
     print("==============================")
     print("Retrieving your current IP address...")
-    response = requests.get("https://ipinfo.io/ip")
-    print(response.text)
+    try:
+        response = requests.get("https://ipinfo.io/ip")
+        response.raise_for_status()
+        print(f"Your IP address is: {response.text.strip()}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+    
     input("Press Enter to continue...")
 
 def file_sender():
@@ -101,13 +131,16 @@ def file_sender():
     print("==============================")
     print("        File Sender")
     print("==============================")
-    ip = input("Enter IP address to send file to: ")
-    num_gb = int(input("Enter number of gigabytes to send: "))
-
-    if num_gb < 1:
-        print("Input must be at least 1.")
-        input("Press Enter to continue...")
-        return
+    ip = input("Enter IP address to send file to: ").strip()
+    while True:
+        try:
+            num_gb = int(input("Enter number of gigabytes to send: "))
+            if num_gb < 1:
+                print("Input must be at least 1.")
+                continue
+            break
+        except ValueError:
+            print("Please enter a valid number.")
 
     for i in range(num_gb):
         print(f"Sending file: 1 GB to {ip} - Packet {i + 1}")
@@ -200,4 +233,4 @@ def install_file():
     input("Press Enter to continue...")
 
 if __name__ == "__main__":
-    main_menu()
+    main
