@@ -2,8 +2,6 @@ import requests
 import os
 import time
 
-def clone_and_run_github_script(): # GitHub Repository URL und Dateiname repo_url = "https://github.com/zino-tp/batchi-.git" script_name = "bv.py" # Temporäres Verzeichnis für das Repository temp_dir = "temp_repo"
-
 def main_menu():
     while True:
         print("==============================")
