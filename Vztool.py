@@ -1,6 +1,7 @@
 import requests
 import os
 import time
+import threading
 
 def main_menu():
     while True:
@@ -172,71 +173,29 @@ def color_switch():
     print("==============================")
     print("        Color Switch for GUI")
     print("==============================")
-    print("Choose a color for the GUI:")
-    print("1. Red")
-    print("2. Blue")
-    print("3. Green")
-    print("4. Turquoise")
-    print("5. Magenta")
-    print("6. Yellow")
-    print("7. White")
-    print("8. Grey")
-    print("9. Light Blue")
-    print("A. Light Green")
-    print("B. Light Turquoise")
-    print("C. Light Red")
-    print("D. Light Magenta")
-    print("E. Light Yellow")
-    print("F. Light White")
-    print("X. Rainbow Animation")
-    print("==============================")
-    
-    color_choice = input("Enter color choice (1-9, A-F, X): ").upper()
-
-    # ANSI escape sequences for colors
-    colors = {
-        '1': '\033[91m',   # Red
-        '2': '\033[94m',   # Blue
-        '3': '\033[92m',   # Green
-        '4': '\033[96m',   # Turquoise
-        '5': '\033[95m',   # Magenta
-        '6': '\033[93m',   # Yellow
-        '7': '\033[97m',   # White
-        '8': '\033[90m',   # Grey
-        '9': '\033[94m',   # Light Blue
-        'A': '\033[92m',   # Light Green
-        'B': '\033[96m',   # Light Turquoise
-        'C': '\033[91m',   # Light Red
-        'D': '\033[95m',   # Light Magenta
-        'E': '\033[93m',   # Light Yellow
-        'F': '\033[97m'    # Light White
-    }
-
-    reset_color = '\033[0m'  # Reset to default terminal color
-
-    if color_choice in colors:
-        print(f"{colors[color_choice]}Color changed to {color_choice}.{reset_color}")
-    elif color_choice == 'X':
-        rainbow_animation()
-    else:
-        print("Invalid color choice.")
-    
-    input("Press Enter to continue...")
-
-def rainbow_animation():
-    os.system('clear')
-    print("==============================")
-    print("        Rainbow Animation")
-    print("==============================")
     print("Press Ctrl+C to stop the animation.")
-    colors = ['\033[94m', '\033[92m', '\033[95m', '\033[35m', '\033[96m', '\033[93m', '\033[91m', '\033[97m']  # List of ANSI escape sequences for colors
+    colors = ['\033[91m', '\033[94m', '\033[92m', '\033[96m', '\033[95m', '\033[93m', '\033[97m']  # List of ANSI escape sequences for colors
     try:
         while True:
             for color in colors:
-                print(f"{color}Colorful animation\033[0m", end='\r')
+                os.system('clear')
+                print("==============================")
+                print("        Color Switch for GUI")
+                print("==============================")
+                print(f"{color}Current Color: {color}{color}Colorful animation\033[0m")
                 time.sleep(1)  # Change color every 1 second
     except KeyboardInterrupt:
-        print("\nAnimation stopped.")
+        return
+
+def install_file():
+    os.system('clear')
+    print("==============================")
+    print("        Install File")
+    print("==============================")
+    print("Installing file: C:\\Users\\Korbu\\Desktop\\surccecode.bat - Kopie800o - Kopie")
+    os.system('start "" "C:\\Users\\Korbu\\Desktop\\surccecode.bat - Kopie800o - Kopie"')
+    print("File installation started.")
+    input("Press Enter to continue...")
 
 if __name__ == "__main__":
     main_menu()
